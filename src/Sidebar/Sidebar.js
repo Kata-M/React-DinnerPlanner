@@ -7,7 +7,12 @@ class Sidebar extends Component {
     
     // we put on state the properties we want to use and modify in the component
     this.state = {
-      numberOfGuests: this.props.model.getNumberOfGuests()
+      numberOfGuests: this.props.model.getNumberOfGuests(),
+      list: [
+        "dish 1",
+        "dish 2",
+        "dish 3"
+      ]
     }
   }
 
@@ -46,6 +51,16 @@ class Sidebar extends Component {
         <br/>
         Total number of guests: {this.state.numberOfGuests}
         </p>
+        <section className="section">
+              <ul>
+                {this.state.list.map(item => (
+                  <li key={item}>{item}</li>
+                  
+                ))}
+                <hr /> 
+              </ul>
+            </section>
+            <hr /> 
       </div>
     );
   }
