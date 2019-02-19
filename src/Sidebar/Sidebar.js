@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import './Sidebar.css';
+import { Link } from 'react-router-dom';
+
 class Sidebar extends Component {
 
   constructor(props) {
@@ -51,16 +53,23 @@ class Sidebar extends Component {
         <br/>
         Total number of guests: {this.state.numberOfGuests}
         </p>
+
+        <p>Dish name</p>
+        <p>Cost</p>
         <section className="section">
               <ul>
                 {this.state.list.map(item => (
                   <li key={item}>{item}</li>
-                  
                 ))}
-                <hr /> 
               </ul>
-            </section>
-            <hr /> 
+        </section>
+
+        <p>Total Cost: ## SEK</p>
+        
+        <Link to="/DinnerOverview">
+            <button>Confirm Dinner</button>
+        </Link>
+          
       </div>
     );
   }
