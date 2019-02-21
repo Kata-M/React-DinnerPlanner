@@ -18,6 +18,8 @@ class Sidebar extends Component {
         {name: "dish 2" , price : 2},
         {name: "dish 3" , price : 2},
       ],
+      totalCost: 0
+
     }
   }
 
@@ -76,7 +78,7 @@ class Sidebar extends Component {
     
     return (
   
-      <Col className="Sidebar" xs={12} md={4}>
+      <Col className="Sidebar" xs={12} md={4} large={4}>
           <Row>
               <h5 className="headline5"> My Dinner </h5>
           </Row>  
@@ -88,22 +90,16 @@ class Sidebar extends Component {
               </p>
           </Row> 
           <Row>
-            <div className="container">
-              <div className="row">
-                  <div className="col s12 board">
-                    <table id="simple-board">
-                        <thead>
-                          <td className="tableCell">Dish name{" "} </td> <td className="tableCell">Cost {" "}</td> 
-                        </thead>
-                        <tbody>
-                            <hr/>
-                            {rows}
-                            <hr/>
-                        </tbody>
-                    </table>
-                  </div>
-                </div>
-              </div>  
+            <table id="simple-board">
+                <thead>
+                  <td className="tableCell">Dish name{" "} </td> <td className="tableCell">Cost {" "}</td> 
+                </thead>
+                <tbody>
+                    <hr/>
+                    {rows}
+                    <hr/>
+                </tbody>
+            </table>
           </Row> 
           <Row>
             <p>Total Cost: {totalCost} SEK</p>

@@ -28,18 +28,19 @@ class SelectDish extends Component {
   render() {
     return (
       // <div className="SelectDish">
-       <Container>
+       <Container >
             <Row>
               {/* We pass the model as property to the Sidebar component */}
               <Sidebar model={this.props.model}/>
               <Col xs={12} md={8} large={8}>
-                <Row className="SelectDish">
+    
+                <Row className="findDish">
                   <h4 className="headline4">FIND A DISH</h4>
 
                   </Row>
                   <Row className="SearchBar">
                   <div className="content">
-                    <div className="container">
+                    {/* <div className="container"> */}
                       <section className="section">
                         <form className="form" id="addItemForm">
                           <input
@@ -48,26 +49,27 @@ class SelectDish extends Component {
                             id="addInput"
                             placeholder="Enter key words"
                           />
-                          <select id = "selectType">
+                          <select className="dropDownSearch" id = "selectType">
                             <option value="all">All</option>
                             <option value="maindish">Main Dish</option>
                             <option selected value="starter">Starter</option>
                             <option value="dessert">Dessert</option>
                           </select>
 
-                          <button className="button is-info" onClick={this.addItem}>
+                          <button className="buttonis-info" onClick={this.addItem}>
                             Search
                           </button>
                         </form>
                       </section>
                     
-                    </div>
+                    {/* </div> */}
                   </div>
                   </Row>
                  
                   <Row className = "Dishes">
                     <Dishes/>
                   </Row>
+
               </Col>
             </Row>
           </Container>

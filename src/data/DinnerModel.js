@@ -4,7 +4,11 @@ const httpOptions = {
 
 const DinnerModel = function () {
 
-  let numberOfGuests = 4;
+  let numberOfGuests = 1;
+  let totalCost = 0;
+  var menu = [];
+  var allTypes = ["main course", "side dish", "dessert", "appetizer", "salad", "bread", "breakfast", "soup", "beverage", "sauce", "drink"];
+
   let observers = [];
 
   this.setNumberOfGuests = function (num) {
@@ -15,6 +19,30 @@ const DinnerModel = function () {
   this.getNumberOfGuests = function () {
     return numberOfGuests;
   };
+
+  this.getTotalCost = function () {
+    return totalCost;
+  };
+
+  this.setTotalCost = function (num) {
+    totalCost = num;
+    notifyObservers();
+  };
+
+  //Returns the total price of the menu (all the ingredients multiplied by number of guests).
+	this.getTotalMenuPrice = function() {
+		//DONE Lab 1
+		var totalPrice = 0;
+		menu.forEach(function(menuDish)
+		{
+		
+			menuDish.extendedIngredients.forEach(function(ingredient) {
+					 totalPrice += 1;
+			});
+		});
+		return totalPrice*this.getNumberOfGuests();
+		
+	}
 
   // API Calls
 
