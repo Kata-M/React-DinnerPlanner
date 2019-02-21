@@ -34,9 +34,10 @@ class SelectDish extends Component {
               <Sidebar model={this.props.model}/>
               <Col xs={12} md={8} large={8}>
                 <Row className="SelectDish">
-                  <h4>FIND A DISH</h4>
+                  <h4 className="headline4">FIND A DISH</h4>
 
-                      
+                  </Row>
+                  <Row className="SearchBar">
                   <div className="content">
                     <div className="container">
                       <section className="section">
@@ -63,6 +64,7 @@ class SelectDish extends Component {
                     </div>
                   </div>
                   </Row>
+                 
                   <Row className = "Dishes">
                     <Dishes/>
                   </Row>

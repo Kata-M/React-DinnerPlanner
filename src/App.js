@@ -24,7 +24,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <header className="App-header">
+        {/* <header className="App-header"> */}
         <Jumbotron fluid>       
              <h1 className="App-title" >{this.state.title}</h1>
         </Jumbotron>
@@ -35,7 +35,7 @@ class App extends Component {
           <Route path="/DinnerPrintout" render={() => <DinnerPrintout model={modelInstance}/>}/> 
           <Route path="/DishDetails" render={() => <DishDetails model={modelInstance}/>}/> 
         
-        </header>
+        {/* </header> */}
       </div>
     );
   }

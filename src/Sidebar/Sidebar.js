@@ -3,6 +3,7 @@ import './Sidebar.css';
 import { Link } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.css' ;
 import{Container, Row, Col} from 'reactstrap';
+import{Button} from 'reactstrap';
 
 class Sidebar extends Component {
 
@@ -13,11 +14,10 @@ class Sidebar extends Component {
     this.state = {
       numberOfGuests: this.props.model.getNumberOfGuests(),
       list: [
-        {name: "dish 1"},
-        {name: "dish 2"},
-        {name: "dish 3"},
+        {name: "dish 1" , price : 2},
+        {name: "dish 2" , price : 2},
+        {name: "dish 3" , price : 2},
       ],
-      size: 3
     }
   }
 
@@ -46,69 +46,74 @@ class Sidebar extends Component {
   onNumberOfGuestsChanged = (e) => {
     this.props.model.setNumberOfGuests(+e.target.value)
   }
+
+  
   
 
   render() {
-    /*let rows = [];
-    for (var i = 0; i < this.state.size; i++){
-      let rowID = `row${i}`
-      let cell = []
-      for (var idx = 0; idx < this.state.size; idx++){
-        let cellID = `cell${i}-${idx}`
-        cell.push(<td key={cellID} id={cellID}></td>)
-      }
-      rows.push(<tr key={i} id={rowID}>{cell}</tr>)
-    }*/
+
+    /*rows to the menu table in sidebar*/
     const rows = this.state.list.map((dish) =>
       <tr>
+         
         {Object.keys(dish).map(function(attr) {
           return (
-            <td>{dish[attr]}</td>
+            <td className="tableCell">{dish[attr]}</td>
+            
           )
         })}
+ 
+       <Button className="deleteDish" variant="info">x</Button>
+
       </tr>
     )
-    console.log(rows);
+
+
+    /*total cost calculation*/
+      const arrSum = arr => arr.reduce((a,b) => a + b, 0)
+      var totalCostArray = this.state.list.map((dish) =>  dish.price * this.state.numberOfGuests)
+      var totalCost = arrSum(totalCostArray)
     
     return (
   
-              <Col className="Sidebar" xs={12} md={4}>
-                <p>
-                People: <input value={this.state.numberOfGuests} onChange={this.onNumberOfGuestsChanged}/>
-                <br/>
-                Total number of guests: {this.state.numberOfGuests}
-                </p>
-
-                <p>Dish name</p>
-                <p>Cost</p>
-                <section className="section">
-                      <ul>
-                           {this.state.list.map(item => (
-                          <li key={item.name}>{item.name}</li>
-                        ))}
-                      </ul>
-                </section>
-
-                <div className="container">
-                <div className="row">
+      <Col className="Sidebar" xs={12} md={4}>
+          <Row>
+              <h5 className="headline5"> My Dinner </h5>
+          </Row>  
+          <Row>
+              <p>
+              People: <input value={this.state.numberOfGuests} onChange={this.onNumberOfGuestsChanged}/>
+              <br/>
+              Total no. people: {this.state.numberOfGuests}
+              </p>
+          </Row> 
+          <Row>
+            <div className="container">
+              <div className="row">
                   <div className="col s12 board">
                     <table id="simple-board">
-                              <tbody>
-                        {rows}
-                      </tbody>
+                        <thead>
+                          <td className="tableCell">Dish name{" "} </td> <td className="tableCell">Cost {" "}</td> 
+                        </thead>
+                        <tbody>
+                            <hr/>
+                            {rows}
+                            <hr/>
+                        </tbody>
                     </table>
                   </div>
                 </div>
-              </div>
-          
-                <p>Total Cost: ## SEK</p>
-
-                <Link to="/DinnerOverview">
+              </div>  
+          </Row> 
+          <Row>
+            <p>Total Cost: {totalCost} SEK</p>
+          </Row> 
+          <Row>
+              <Link to="/DinnerOverview">
                     <button>Confirm Dinner</button>
-                </Link>
-
-              
-              </Col>
+              </Link>
+          </Row> 
+        </Col>
     
     );
   }

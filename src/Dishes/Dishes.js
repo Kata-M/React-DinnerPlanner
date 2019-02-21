@@ -86,7 +86,7 @@ class Dishes extends Component {
 
     return (
       <div className="Dishes">
-        <h3>Dishes</h3>
+        <h3 className="headline3">Dishes</h3>
         <Row>
            {dishesList}
         </Row>
