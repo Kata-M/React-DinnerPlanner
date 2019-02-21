@@ -1,9 +1,37 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import './Dishes.css';
 // Alternative to passing the moderl as the component property, 
 // we can import the model instance directly
-import {modelInstance} from '../data/DinnerModel';
+import { modelInstance } from '../data/DinnerModel';
+import 'bootstrap/dist/css/bootstrap.css';
+import { Container, Row, Col } from 'reactstrap';
 
+
+class DishHeader extends React.Component {
+  render() {
+    const { image } = this.props;
+    var style = {
+      backgroundImage: 'url(' + image + ')',
+    };
+    return (
+      <header style={style} id={image} className="card-header"/>
+    )
+  }
+}
+
+class DishBody extends React.Component {
+  render() {
+    return (
+      <div className="card-body">
+
+        <h2>{this.props.title}</h2>
+
+        <p className="body-content">{this.props.text}</p>
+
+      </div>
+    )
+  }
+}
 
 class Dishes extends Component {
   constructor(props) {
@@ -35,7 +63,7 @@ class Dishes extends Component {
 
   render() {
     let dishesList = null;
-    
+
     // depending on the state we either generate
     // useful message to the user or show the list
     // of returned dishes
@@ -45,7 +73,10 @@ class Dishes extends Component {
         break;
       case 'LOADED':
         dishesList = this.state.dishes.map((dish) =>
-          <li key={dish.id}>{dish.title}</li>
+          <div className="card">
+                  <DishHeader image={'https://spoonacular.com/recipeImages/'+dish.image} />
+                  <DishBody title={dish.title} />
+          </div>
         )
         break;
       default:
@@ -56,9 +87,9 @@ class Dishes extends Component {
     return (
       <div className="Dishes">
         <h3>Dishes</h3>
-        <ul>
-          {dishesList}
-        </ul>
+        <Row>
+           {dishesList}
+        </Row>
       </div>
     );
   }

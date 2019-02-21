@@ -2,7 +2,9 @@ import React, { Component } from 'react';
 import './SelectDish.css';
 import Sidebar from '../Sidebar/Sidebar';
 import Dishes from '../Dishes/Dishes';
-//import Select from 'react-select';
+import 'bootstrap/dist/css/bootstrap.css' ;
+import{Container, Row, Col} from 'reactstrap';
+
 
 const scaryAnimals = [
   { label: "Alligators", value: 1 },
@@ -17,6 +19,7 @@ class SelectDish extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      
     }
 
   }
@@ -24,48 +27,49 @@ class SelectDish extends Component {
 
   render() {
     return (
-      <div className="SelectDish">
-        <h4>FIND A DISH</h4>
+      // <div className="SelectDish">
+       <Container>
+            <Row>
+              {/* We pass the model as property to the Sidebar component */}
+              <Sidebar model={this.props.model}/>
+              <Col xs={12} md={8} large={8}>
+                <Row className="SelectDish">
+                  <h4>FIND A DISH</h4>
 
-            
-        <div className="content">
-          <div className="container">
-            {/*<section className="section">
-              <ul>
-                {this.state.list.map(item => (
-                  <li key={item}>{item}</li>
-                ))}
-              </ul>
-            </section>
-            <hr /> */}
-            <section className="section">
-              <form className="form" id="addItemForm">
-                <input
-                  type="text"
-                  className="input"
-                  id="addInput"
-                  placeholder="Enter key words"
-                />
-                <select id = "selectType">
-                  <option value="all">All</option>
-                  <option value="maindish">Main Dish</option>
-                  <option selected value="starter">Starter</option>
-                  <option value="dessert">Dessert</option>
-                </select>
+                      
+                  <div className="content">
+                    <div className="container">
+                      <section className="section">
+                        <form className="form" id="addItemForm">
+                          <input
+                            type="text"
+                            className="input"
+                            id="addInput"
+                            placeholder="Enter key words"
+                          />
+                          <select id = "selectType">
+                            <option value="all">All</option>
+                            <option value="maindish">Main Dish</option>
+                            <option selected value="starter">Starter</option>
+                            <option value="dessert">Dessert</option>
+                          </select>
 
-                <button className="button is-info" onClick={this.addItem}>
-                  Search
-                </button>
-              </form>
-            </section>
-           
-          </div>
-        </div>
-
-        {/* We pass the model as property to the Sidebar component */}
-        <Sidebar model={this.props.model}/>
-        <Dishes/>
-      </div>
+                          <button className="button is-info" onClick={this.addItem}>
+                            Search
+                          </button>
+                        </form>
+                      </section>
+                    
+                    </div>
+                  </div>
+                  </Row>
+                  <Row className = "Dishes">
+                    <Dishes/>
+                  </Row>
+              </Col>
+            </Row>
+          </Container>
+      // </div>
     );
   }
 }
