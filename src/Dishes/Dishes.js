@@ -5,6 +5,7 @@ import './Dishes.css';
 import { modelInstance } from '../data/DinnerModel';
 import 'bootstrap/dist/css/bootstrap.css';
 import { Container, Row, Col } from 'reactstrap';
+import { Link } from 'react-router-dom';
 
 
 class DishHeader extends React.Component {
@@ -14,7 +15,7 @@ class DishHeader extends React.Component {
       backgroundImage: 'url(' + image + ')',
     };
     return (
-      <header style={style} id={image} className="card-header"/>
+      <header style={style} id={image} className="card-header" />
     )
   }
 }
@@ -49,7 +50,8 @@ class Dishes extends Component {
   componentDidMount = () => {
     // when data is retrieved we update the state
     // this will cause the component to re-render
-    modelInstance.getAllDishes().then(dishes => {
+    modelInstance.getAllDishes(this.props.type,this.props.filter).then(dishes => {
+      {console.log('calling model',this.props)}
       this.setState({
         status: 'LOADED',
         dishes: dishes.results
@@ -73,9 +75,11 @@ class Dishes extends Component {
         break;
       case 'LOADED':
         dishesList = this.state.dishes.map((dish) =>
-          <div className="card">
-                  <DishHeader image={'https://spoonacular.com/recipeImages/'+dish.image} />
-                  <DishBody title={dish.title} />
+          <div onClick={console.log('looping',dish, this.props)} id="dish.id"  key={dish.id} className="card">
+            <Link to={{pathname: '/DishDetails', state:{dish}}}>
+              <DishHeader image={'https://spoonacular.com/recipeImages/' + dish.image} />
+              <DishBody title={dish.title} />
+            </Link>
           </div>
         )
         break;
@@ -88,7 +92,7 @@ class Dishes extends Component {
       <div className="Dishes">
         {/* <h3 className="headline3">Dishes</h3> */}
         <Row>
-           {dishesList}
+          {dishesList}
         </Row>
       </div>
     );

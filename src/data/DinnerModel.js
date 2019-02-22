@@ -42,16 +42,41 @@ const DinnerModel = function () {
 		});
 		return totalPrice*this.getNumberOfGuests();
 		
+  }
+
+  this.getAllTypes = function() {		
+
+		return allTypes;
 	}
 
   // API Calls
 
-  this.getAllDishes = function () {
-    const url = 'http://sunset.nada.kth.se:8080/iprog/group/46/recipes/search'
+  this.getAllDishes = function (type, filter) {
+    let url = 'http://sunset.nada.kth.se:8080/iprog/group/46/recipes/search'
+
+    if(type != null){
+      url  = `http://sunset.nada.kth.se:8080/iprog/group/57/recipes/search?type=${type}`
+      console.log(type)
+		}
+		if(filter != null && type != null){
+			
+			url  = `http://sunset.nada.kth.se:8080/iprog/group/57/recipes/search?type=${type}&number=20&query=${filter}`
+    }
+    
     return fetch(url, httpOptions)
       .then(processResponse)
       .catch(handleError)
   }
+
+  this.getDish = function (id) {
+
+		let url = "http://sunset.nada.kth.se:8080/iprog/group/46/recipes/"+id+"/information";
+
+		return fetch(url, httpOptions)
+      .then(processResponse)
+      .catch(handleError)
+  }
+		
   
   // API Helper methods
 
