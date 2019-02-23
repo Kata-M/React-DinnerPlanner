@@ -81,20 +81,31 @@ class DishDetails extends Component {
       case 'LOADED':
         dishDetails = 
      
-          <div id="dish.id"  key={this.state.dish.id} className="card">
-            <h4>Hello this is dish {this.state.dish.title} </h4>
+          <div id="dish.id"  key={this.state.dish.id} >
+            <h2>{this.state.dish.title} </h2>
             {console.log('dish details looping',this.state.dish, this.props)}
            
-               <DishHeader image={this.state.dish.image} />
-               {/* <DishHeader image={'https://spoonacular.com/recipeImages/684100-556x370.jpg'} /> */}
-
-               <DishBody title={this.state.dish.title} />
+            <DishHeader image={this.state.dish.image} />
+            {/* <DishBody title={this.state.dish.title} /> */}
+            <p> {this.state.dish.instructions}</p>
+            <Link to="/search">
+              <button>Back To Search</button>
+            </Link>
+            <h4> Preparation </h4>
+            <p> {this.state.dish.instructions}</p>
 
           </div>
 
         break;
       default:
-        dishDetails = <b>Failed to load data, please try again</b>
+        dishDetails = 
+
+        <div id="dish.id"  key={this.state.dish.id} >
+              <b>Failed to load data, please try again</b>
+              <Link to="/search">
+                 <button>Back To Search</button>
+              </Link>
+        </div>
         break;
     }
 
@@ -102,34 +113,11 @@ class DishDetails extends Component {
 
       <Container>
         <Row>
-          {console.log("Before sidebar insert with export model : "+this.props.model)}
         <Sidebar model={this.props.model} />
         <Col xs={12} md={8} large={8}>
           <div className="DishDetails">
             <hr></hr>
-            {console.log("hello "+ this.state.dishCard)}
-            {console.log("TESTS : "+ this.props.model.getDish(this.state.dishCard))}
-             {/* <h4> Dish 1 title : {this.state.dish.title}</h4>
-            <h4> Dish 1 image here : {this.state.dish.id}</h4> */}
-             <p> Description of the dish bla bla bla bla bla </p>
-
-            <Link to="/search">
-              <button>Back To Search</button>
-            </Link>
-
-            <h4> Dish 1 preparation ID is {this.state.dishCard}</h4>
-            <p> How to prepare this dish add salt and sugar and shake. Then bake and serve cold. Bon Apetite!</p>
-            <Row>
-               {dishDetails}
-            </Row>
-
-            <section className="section">
-              <ul>
-                {this.state.list.map(item => (
-                  <li key={item}>{item}</li>
-                ))}
-              </ul>
-            </section>
+              {dishDetails}
             <button>Add To Menu</button>
           </div>
           </Col>
