@@ -8,6 +8,7 @@ const DinnerModel = function () {
   let totalCost = 0;
   var menu = [];
   var allTypes = ["main course", "side dish", "dessert", "appetizer", "salad", "bread", "breakfast", "soup", "beverage", "sauce", "drink"];
+  let dishCard  = null;
 
   let observers = [];
 
@@ -18,6 +19,14 @@ const DinnerModel = function () {
 
   this.getNumberOfGuests = function () {
     return numberOfGuests;
+  };
+
+  this.setCardDish = function (dish){
+    dishCard = dish;
+  };
+
+  this.getCardDish = function () {
+    return dishCard;
   };
 
   this.getTotalCost = function () {
@@ -55,12 +64,12 @@ const DinnerModel = function () {
     let url = 'http://sunset.nada.kth.se:8080/iprog/group/46/recipes/search'
 
     if(type != null){
-      url  = `http://sunset.nada.kth.se:8080/iprog/group/57/recipes/search?type=${type}`
+      url  = `http://sunset.nada.kth.se:8080/iprog/group/46/recipes/search?type=${type}`
       console.log(type)
 		}
 		if(filter != null && type != null){
 			
-			url  = `http://sunset.nada.kth.se:8080/iprog/group/57/recipes/search?type=${type}&number=20&query=${filter}`
+			url  = `http://sunset.nada.kth.se:8080/iprog/group/46/recipes/search?type=${type}&number=20&query=${filter}`
     }
     
     return fetch(url, httpOptions)

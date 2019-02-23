@@ -6,6 +6,7 @@ import { modelInstance } from '../data/DinnerModel';
 import 'bootstrap/dist/css/bootstrap.css';
 import { Container, Row, Col } from 'reactstrap';
 import { Link } from 'react-router-dom';
+import DishDetails from '../DishDetails/DishDetails';
 
 
 class DishHeader extends React.Component {
@@ -44,6 +45,9 @@ class Dishes extends Component {
     }
   }
 
+  SaveCardToModel(dish){
+    this.props.model.setCardDish(dish)
+  }
   // this methods is called by React lifecycle when the 
   // component is actually shown to the user (mounted to DOM)
   // that's a good place to call the API and get the data
@@ -75,10 +79,11 @@ class Dishes extends Component {
         break;
       case 'LOADED':
         dishesList = this.state.dishes.map((dish) =>
-          <div onClick={console.log('looping',dish, this.props)} id="dish.id"  key={dish.id} className="card">
-            <Link to={{pathname: '/DishDetails', state:{dish}}}>
-              <DishHeader image={'https://spoonacular.com/recipeImages/' + dish.image} />
-              <DishBody title={dish.title} />
+          <div onClick={this.SaveCardToModel(dish) } id="dish.id"  key={dish.id} className="card">
+            {console.log('looping',dish, this.props)}
+            <Link to={{pathname: '/DishDetails/'+dish.id }}>
+               <DishHeader image={'https://spoonacular.com/recipeImages/' + dish.image} />
+               <DishBody title={dish.title} />
             </Link>
           </div>
         )

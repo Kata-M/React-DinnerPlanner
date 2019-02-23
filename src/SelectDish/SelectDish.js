@@ -112,7 +112,8 @@ class SelectDish extends Component {
               </div>
             </Row>
             {console.log("Testing Search",this.state.term,this.state.filter)}
-            <DisplayDishes  term={this.state.term}  filter={this.state.filter} />
+            {/* <DisplayDishes  term={this.state.term}  filter={this.state.filter} /> */}
+            {<Dishes model={this.props.model} type={this.props.term} filter={this.props.filter} />}
           </Col>
         </Row>
       </Container>
