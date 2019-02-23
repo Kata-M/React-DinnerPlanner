@@ -6,7 +6,7 @@ import { modelInstance } from '../data/DinnerModel';
 import 'bootstrap/dist/css/bootstrap.css';
 import { Container, Row, Col } from 'reactstrap';
 import { Link } from 'react-router-dom';
-import DishDetails from '../DishDetails/DishDetails';
+
 
 
 class DishHeader extends React.Component {

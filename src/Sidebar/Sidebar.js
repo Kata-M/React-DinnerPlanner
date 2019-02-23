@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.css' ;
 import{Container, Row, Col} from 'reactstrap';
 import{Button} from 'reactstrap';
+import { Divider, Grid, Image, Segment } from 'semantic-ui-react'
 
 class Sidebar extends Component {
 
@@ -109,7 +110,7 @@ class Sidebar extends Component {
                     <button>Confirm Dinner</button>
               </Link>
           </Row> 
-        </Col>
+    </Col>
     
     );
   }
