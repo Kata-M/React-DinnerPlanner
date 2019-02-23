@@ -8,7 +8,7 @@ const DinnerModel = function () {
   let totalCost = 0;
   var menu = [];
   var allTypes = ["main course", "side dish", "dessert", "appetizer", "salad", "bread", "breakfast", "soup", "beverage", "sauce", "drink"];
-  let dishCard  = null;
+  let dish = null;
 
   let observers = [];
 
@@ -21,12 +21,13 @@ const DinnerModel = function () {
     return numberOfGuests;
   };
 
-  this.setCardDish = function (dish){
-    dishCard = dish;
+  this.setDish = function (dish){
+    dish = dish;
+    console.log("dish is set now in model");
   };
 
-  this.getCardDish = function () {
-    return dishCard;
+  this.getDish = function () {
+    return dish;
   };
 
   this.getTotalCost = function () {
@@ -119,6 +120,97 @@ const DinnerModel = function () {
   const notifyObservers = function () {
     observers.forEach(o => o.update());
   };
+
+
+	//Adds the passed dish to the menu. If the dish of that type already exists on the menu
+	//it is removed from the menu and the new one added.
+	// this.addDishToMenu = function(id) {
+	// 	var counter = 0;
+	// 	console.log(id);
+	// 	var alreadyInMenu = false;
+
+	// 	this.getDish(id)
+	// 	.then(dish => {
+	// 			// if menu empty or does not exist, put new element in
+	// 			if (menu === undefined || menu.length == 0) {
+
+	// 				menu[0] = dish;
+
+	// 			//if items already in the menu
+	// 			}else{ 
+
+	// 				menu.forEach(function(menuDish)
+	// 				{
+					
+	// 					if(menuDish.id == id){
+	// 						alreadyInMenu = true;
+	// 						//break;
+	// 					}
+	// 					counter++;
+	// 				});
+	// 				if(alreadyInMenu == false){
+	// 				//add new dish to the end of the menu array
+	// 						menu[counter] = dish;
+	// 						console.log(dish);
+	// 				}
+	// 			}
+
+	// 			notifyObservers();
+	// 	})	
+  // }
+  
+  this.addDishToMenu = function(dish) {
+      var counter = 0;  
+      // if menu empty or does not exist, put new element in
+      if (menu === undefined || menu.length == 0) {
+        menu[counter] = dish;
+        counter++;
+        console.log("trying to add to menu: "+dish);
+
+      //if items already in the menu
+      }else{ 
+            menu[counter] = dish;
+            counter++;
+            console.log("trying to add to menu: "+dish);
+      }
+  
+
+     // notifyObservers();
+
+    }
+  
+
+
+	//Removes dish from menu
+	this.removeDishFromMenu = function(id) {
+		//TODO Lab 1
+		var counter = 0;
+		var idFound = false;
+
+		if(menu.length == 1){
+			if(menu[counter].id == id){
+				menu.splice(counter, 1); 
+			}else{
+				alert("The dish you tried to remove does not excist on the menu!");
+			}
+		}else{
+
+			menu.forEach(function(menuDish)
+				{
+					if(menuDish.id == id){
+						//remove the excisting dish 
+						menu.splice(counter, 1); 
+						idFound = true;
+					}
+					counter++;
+				});
+
+				if(idFound == false){
+					alert("The dish you tried to remove does not exist on the menu!");
+				}
+
+		}
+	}
 };
 
 export const modelInstance = new DinnerModel();

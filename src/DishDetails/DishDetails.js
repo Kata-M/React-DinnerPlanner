@@ -41,12 +41,20 @@ class DishDetails extends Component {
     this.state = {
 
       dishCard: this.props.match.params.id,
+      numberOfIngredients : 0,
       numberOfGuests: this.props.model.getNumberOfGuests(),
       dish : null,
       status: 'INITIAL'
     }
 
   }
+
+  doSomething(dishTitleParam, ingredientCountParam){
+    console.log(dishTitleParam)
+    console.log(ingredientCountParam)
+  }
+
+
 
   componentDidMount = () => {
     this.props.model.addObserver(this)
@@ -86,13 +94,18 @@ class DishDetails extends Component {
     this.props.model.setNumberOfGuests(+e.target.value)
   }
 
+  handleClick(e) {
+    e.preventDefault();
+    console.log('The button was clicked.');
+    modelInstance.addDishToMenu(modelInstance.getDish());
+  }
+ 
+
 
   render() {
     console.log('Inside dish details', this.state);
     let dishDetails = null;
     let ingredientTable = null;
-   
-  
    
    
     switch (this.state.status) {
@@ -105,18 +118,20 @@ class DishDetails extends Component {
 
       let ingredientCost = 1*this.state.numberOfGuests;
       let ingredientAmount = this.state.numberOfGuests;
+      let ingredientCount = 0;
          /*rows to the ingredient table in sidebar*/
         const rows = this.state.dish.extendedIngredients.map((ingredient) =>
           <tr> 
+            {ingredientCount++}
+            {console.log("ingredient count : "+ingredientCount)}
             <td> {ingredient.name} </td>
             <td> {ingredientAmount*ingredient.measures.metric.amount}</td>
             <td> {ingredient.measures.metric.unitShort}</td>
             <td> SEK </td>
-            <td> {ingredientCost} </td>
-            {console.log("ingredient name : "+ ingredient.name)}
-           
+            <td> {ingredientCost} </td>   
          </tr>
         )
+        modelInstance.setDish(this.state.dish)
         dishDetails = 
           // <div id="dish.id"  key={this.state.dish.id} >
            <Col className="dishDetails" xs={12} md={4} large={4}>
@@ -145,7 +160,7 @@ class DishDetails extends Component {
                     <hr/>
                     {rows}
                     <hr/>
-                    <button>Add To Menu</button>
+                    <button onClick={this.props.model.addDishToMenu(this.state.dish)}>Add To Menu</button>
                 </tbody>
             </table>
         {/* </div> */}
@@ -173,20 +188,8 @@ class DishDetails extends Component {
            <Sidebar model={this.props.model}/>
            {dishDetails}
            {ingredientTable}
+           <button onClick={this.handleClick}> test </button>
         </Row>
-        {/* <Row>
-        <Sidebar model={this.props.model} />
-        <Col xs={12} md={8} large={8}>
-          <div className="DishDetails">
-            <hr></hr>
-              {dishDetails}
-            <button>Add To Menu</button>
-          </div>
-          </Col>
-          <Col xs={12} md={4} large={4}>
-               {ingredientTable}
-          </Col>
-        </Row> */}
       </Container>
     );
   }
