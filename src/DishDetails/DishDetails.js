@@ -23,6 +23,18 @@ class DishBody extends React.Component {
   }
 }
 
+class DishHeader extends React.Component {
+  render() {
+    const { image } = this.props;
+    var style = {
+      backgroundImage: 'url(' + image + ')',
+    };
+    return (
+      <header style={style} id={image} className="card-header" />
+    )
+  }
+}
+
 class DishDetails extends Component {
   constructor(props) {
     super(props);
@@ -48,11 +60,11 @@ class DishDetails extends Component {
       {console.log('get dish :) '+dish)}
       this.setState({
         status: 'LOADED',
-        dish: dish
+        dish: dish,
       })
     }).catch(() => {
       this.setState({
-        status: 'ERROR'
+        status: 'ERROR',
       })
     })
 
@@ -67,18 +79,20 @@ class DishDetails extends Component {
       dishDetails = <em>Loading...</em>
         break;
       case 'LOADED':
-      // dishDetails = this.state.dish.map((dish) =>
-      //     <div onClick={this.SaveCardToModel(dish) } id="dish.id"  key={dish.id} className="card">
-      //       {console.log('looping',dish, this.props)}
-      //       <Link to={{pathname: '/DishDetails/'+dish.id }}>
-             
-      //          <DishBody title={dish.title} />
-      //       </Link>
-      //     </div>
-       // )
+        dishDetails = 
+     
+          <div id="dish.id"  key={this.state.dish.id} className="card">
+            <h4>Hello this is dish {this.state.dish.title} </h4>
+            {console.log('dish details looping',this.state.dish, this.props)}
+           
+               <DishHeader image={'https://spoonacular.com/recipeImages/' + this.state.dish.image} />
+               <DishBody title={this.state.dish.title} />
+
+          </div>
+
         break;
       default:
-      dishDetails = <b>Failed to load data, please try again</b>
+        dishDetails = <b>Failed to load data, please try again</b>
         break;
     }
 
@@ -105,7 +119,7 @@ class DishDetails extends Component {
             <p> How to prepare this dish add salt and sugar and shake. Then bake and serve cold. Bon Apetite!</p>
             <Row>
                {dishDetails}
-             </Row>
+            </Row>
 
             <section className="section">
               <ul>
