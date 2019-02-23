@@ -85,7 +85,9 @@ class DishDetails extends Component {
             <h4>Hello this is dish {this.state.dish.title} </h4>
             {console.log('dish details looping',this.state.dish, this.props)}
            
-               <DishHeader image={'https://spoonacular.com/recipeImages/' + this.state.dish.image} />
+               <DishHeader image={this.state.dish.image} />
+               {/* <DishHeader image={'https://spoonacular.com/recipeImages/684100-556x370.jpg'} /> */}
+
                <DishBody title={this.state.dish.title} />
 
           </div>
