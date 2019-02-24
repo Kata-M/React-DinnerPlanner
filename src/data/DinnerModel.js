@@ -214,7 +214,8 @@ const DinnerModel = function () {
 					alert("The dish you tried to remove does not exist on the menu!");
 				}
 
-		}
+    }
+    notifyObservers();
 	}
 };
 

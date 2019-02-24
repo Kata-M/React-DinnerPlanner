@@ -62,6 +62,12 @@ class Sidebar extends Component {
     )
     return ingredientCount;
   } 
+
+  doSomething(dish){
+    this.props.model.removeDishFromMenu(dish.id)
+    console.log("dish dish removed from meu "+dish.title)
+    console.log("get menu after delete: " +this.props.model.getMenu())
+  }
   
   
 
@@ -80,7 +86,7 @@ class Sidebar extends Component {
         <td> {dish.title}</td>
         <td> {this.countIngredients(dish)*this.state.numberOfGuests}</td>
  
-       <Button className="deleteDish" variant="info">x</Button>
+       <Button className="deleteDish" variant="info" onClick={() => this.doSomething(dish)}>x</Button>
 
       </tr>
     )

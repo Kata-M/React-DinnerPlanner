@@ -205,7 +205,6 @@ class DishDetails extends Component {
            <Sidebar model={this.props.model}/>
            {dishDetails}
            {ingredientTable}
-           <button onClick={this.handleClick}> test </button>
         </Row>
       </Container>
     );
