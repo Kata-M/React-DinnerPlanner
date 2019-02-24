@@ -21,6 +21,10 @@ const DinnerModel = function () {
     return numberOfGuests;
   };
 
+  this.getMenu = function(){
+    return menu;
+  }
+
   this.setDish = function (dish){
     dish = dish;
     console.log("dish is set now in model");
@@ -124,60 +128,61 @@ const DinnerModel = function () {
 
 	//Adds the passed dish to the menu. If the dish of that type already exists on the menu
 	//it is removed from the menu and the new one added.
-	// this.addDishToMenu = function(id) {
-	// 	var counter = 0;
-	// 	console.log(id);
-	// 	var alreadyInMenu = false;
+	this.addDishToMenu = function(dish) {
+		var counter = 0;
+		console.log(dish);
+		var alreadyInMenu = false;
 
-	// 	this.getDish(id)
-	// 	.then(dish => {
-	// 			// if menu empty or does not exist, put new element in
-	// 			if (menu === undefined || menu.length == 0) {
+		// this.getDish(id)
+		// .then(dish => {
+				// if menu empty or does not exist, put new element in
+				if (menu === undefined || menu.length == 0) {
 
-	// 				menu[0] = dish;
+					menu[0] = dish;
 
-	// 			//if items already in the menu
-	// 			}else{ 
+				//if items already in the menu
+				}else{ 
 
-	// 				menu.forEach(function(menuDish)
-	// 				{
+					menu.forEach(function(menuDish)
+					{
 					
-	// 					if(menuDish.id == id){
-	// 						alreadyInMenu = true;
-	// 						//break;
-	// 					}
-	// 					counter++;
-	// 				});
-	// 				if(alreadyInMenu == false){
-	// 				//add new dish to the end of the menu array
-	// 						menu[counter] = dish;
-	// 						console.log(dish);
-	// 				}
-	// 			}
+						if(menuDish.id == dish.id){
+							alreadyInMenu = true;
+							//break;
+						}
+						counter++;
+					});
+					if(alreadyInMenu == false){
+					//add new dish to the end of the menu array
+							menu[counter] = dish;
+							console.log(dish);
+					}
+				}
 
-	// 			notifyObservers();
-	// 	})	
-  // }
+				notifyObservers();
+    // }
+    // )	
+  }
   
-  this.addDishToMenu = function(dish) {
-      var counter = 0;  
-      // if menu empty or does not exist, put new element in
-      if (menu === undefined || menu.length == 0) {
-        menu[counter] = dish;
-        counter++;
-        console.log("trying to add to menu: "+dish);
+  // this.addDishToMenu = function(dish) {
+  //     var counter = 0;  
+  //     // if menu empty or does not exist, put new element in
+  //     if (menu === undefined || menu.length == 0) {
+  //       menu[counter] = dish;
+  //       counter++;
+  //       console.log("trying to add to menu: "+dish);
 
-      //if items already in the menu
-      }else{ 
-            menu[counter] = dish;
-            counter++;
-            console.log("trying to add to menu: "+dish);
-      }
+  //     //if items already in the menu
+  //     }else{ 
+  //           menu[counter] = dish;
+  //           counter++;
+  //           console.log("trying to add to menu: "+dish);
+  //     }
   
 
-     // notifyObservers();
+  //     notifyObservers();
 
-    }
+  //   }
   
 
 

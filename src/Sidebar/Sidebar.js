@@ -14,11 +14,12 @@ class Sidebar extends Component {
     // we put on state the properties we want to use and modify in the component
     this.state = {
       numberOfGuests: this.props.model.getNumberOfGuests(),
-      list: [
-        {name: "dish 1" , price : 2},
-        {name: "dish 2" , price : 2},
-        {name: "dish 3" , price : 2},
-      ],
+      // list: [
+      //   {name: "dish 1" , price : 2},
+      //   {name: "dish 2" , price : 2},
+      //   {name: "dish 3" , price : 2},
+      // ],
+      menu : this.props.model.getMenu(),
       totalCost: 0
 
     }
@@ -41,8 +42,12 @@ class Sidebar extends Component {
   // cause the component to re-render
   update() {
     this.setState({
-      numberOfGuests: this.props.model.getNumberOfGuests()
+      numberOfGuests: this.props.model.getNumberOfGuests(),
+      menu : this.props.model.getMenu()
     })
+    // this.setState(prevState => ({
+    //   menu: [...prevState.menu, newelement]
+    // }))
   }
 
   // our handler for the input's on change event
@@ -50,21 +55,30 @@ class Sidebar extends Component {
     this.props.model.setNumberOfGuests(+e.target.value)
   }
 
+  countIngredients(dish){
+    let ingredientCount = 0;
+    dish.extendedIngredients.map((ingredient) =>
+      ingredientCount++  
+    )
+    return ingredientCount;
+  } 
   
   
 
   render() {
 
     /*rows to the menu table in sidebar*/
-    const rows = this.state.list.map((dish) =>
+    const rows = this.state.menu.map((dish) =>
       <tr>
          
-        {Object.keys(dish).map(function(attr) {
+        {/* {Object.keys(dish).map(function(attr) {
           return (
             <td className="tableCell">{dish[attr]}</td>
             
           )
-        })}
+        })} */}
+        <td> {dish.title}</td>
+        <td> {this.countIngredients(dish)*this.state.numberOfGuests}</td>
  
        <Button className="deleteDish" variant="info">x</Button>
 
@@ -74,7 +88,7 @@ class Sidebar extends Component {
 
     /*total cost calculation*/
       const arrSum = arr => arr.reduce((a,b) => a + b, 0)
-      var totalCostArray = this.state.list.map((dish) =>  dish.price * this.state.numberOfGuests)
+      var totalCostArray = this.state.menu.map((dish) =>  this.countIngredients(dish) * this.state.numberOfGuests)
       var totalCost = arrSum(totalCostArray)
     
     return (

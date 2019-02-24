@@ -42,7 +42,8 @@ class DinnerOverview extends Component {
         "dish 1 image here",
         "dish 2 image here",
         "dish 3 image here"
-      ]
+      ],
+      menu : this.props.model.getDish() //here fetch from dinnerModel menu the dishes from sideBar
     }
 
   }
@@ -53,30 +54,30 @@ class DinnerOverview extends Component {
   componentDidMount = () => {
     // when data is retrieved we update the state
     // this will cause the component to re-render
-    modelInstance.getAllDishes().then(dishes => {
-      this.setState({
-        status: 'LOADED',
-        dishes: dishes.results
-      })
-    }).catch(() => {
-      this.setState({
-        status: 'ERROR'
-      })
-    })
+  //   modelInstance.getAllDishes().then(dishes => {
+  //     this.setState({
+  //       status: 'LOADED',
+  //       dishes: dishes.results
+  //     })
+  //   }).catch(() => {
+  //     this.setState({
+  //       status: 'ERROR'
+  //     })
+  //   })
   }
   
   render() {
-    let dishesList = null;
+    let dishMenu = null;
 
     // depending on the state we either generate
     // useful message to the user or show the list
     // of returned dishes
     switch (this.state.status) {
       case 'INITIAL':
-        dishesList = <em>Loading...</em>
+        dishMenu = <em>Loading...</em>
         break;
       case 'LOADED':
-        dishesList = this.state.dishes.map((dish) =>
+        dishMenu = this.state.menu.map((dish) =>
           <div className="card">
                   <DishHeader image={'https://spoonacular.com/recipeImages/'+dish.image} />
                   <DishBody title={dish.title} />
@@ -84,7 +85,7 @@ class DinnerOverview extends Component {
         )
         break;
       default:
-        dishesList = <b>Failed to load data, please try again</b>
+        dishMenu = <b>Failed to load data, please try again</b>
         break;
     }
     return (
@@ -103,7 +104,7 @@ class DinnerOverview extends Component {
       <hr/>
       <Row className="row">
   
-           {dishesList}
+           {dishMenu}
 
       </Row>
       <Row className="row">

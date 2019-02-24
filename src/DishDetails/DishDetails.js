@@ -49,9 +49,10 @@ class DishDetails extends Component {
 
   }
 
-  doSomething(dishTitleParam, ingredientCountParam){
-    console.log(dishTitleParam)
-    console.log(ingredientCountParam)
+  doSomething(dish){
+    this.props.model.addDishToMenu(dish)
+    console.log("dish added to meu "+dish)
+    console.log("get menu : " +this.props.model.getMenu())
   }
 
 
@@ -99,7 +100,15 @@ class DishDetails extends Component {
     console.log('The button was clicked.');
     modelInstance.addDishToMenu(modelInstance.getDish());
   }
- 
+
+  
+  countIngredients(){
+    let ingredientCount = 0;
+    this.state.dish.extendedIngredients.map((ingredient) =>
+      ingredientCount++  
+    )
+    return ingredientCount;
+  } 
 
 
   render() {
@@ -116,14 +125,16 @@ class DishDetails extends Component {
       case 'LOADED':
 
 
+
       let ingredientCost = 1*this.state.numberOfGuests;
       let ingredientAmount = this.state.numberOfGuests;
       let ingredientCount = 0;
+    
          /*rows to the ingredient table in sidebar*/
         const rows = this.state.dish.extendedIngredients.map((ingredient) =>
           <tr> 
-            {ingredientCount++}
-            {console.log("ingredient count : "+ingredientCount)}
+            {/* {ingredientCount++} */}
+            {console.log("ingredient count : "+ingredientCount++)}
             <td> {ingredient.name} </td>
             <td> {ingredientAmount*ingredient.measures.metric.amount}</td>
             <td> {ingredient.measures.metric.unitShort}</td>
@@ -160,7 +171,13 @@ class DishDetails extends Component {
                     <hr/>
                     {rows}
                     <hr/>
-                    <button onClick={this.props.model.addDishToMenu(this.state.dish)}>Add To Menu</button>
+                    <tr>
+                      <td> <button onClick={() => this.doSomething(this.state.dish)}>Add To Menu</button>  </td>
+                      <td> Cost: {this.countIngredients()*this.state.numberOfGuests}</td>
+                    </tr>
+                    {/* <button onClick={this.props.model.addDishToMenu(this.state.dish)}>Add To Menu</button> */}
+                    {/* {console.log("this state dish :"+this.state.dish)} */}
+                    {/* <button onClick={() => this.doSomething(this.state.dish)}>Add To Menu</button> */}
                 </tbody>
             </table>
         {/* </div> */}
