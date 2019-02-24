@@ -5,10 +5,11 @@ const httpOptions = {
 const DinnerModel = function () {
 
   let numberOfGuests = 1;
-  let totalCost = 0;
+  //let totalCost = 0;
   var menu = [];
   var allTypes = ["main course", "side dish", "dessert", "appetizer", "salad", "bread", "breakfast", "soup", "beverage", "sauce", "drink"];
   let dish = null;
+  var totalCost;
 
   let observers = [];
 
@@ -24,6 +25,14 @@ const DinnerModel = function () {
   this.getMenu = function(){
     return menu;
   }
+
+  this.setTotalCost = function (cost){
+    totalCost = cost;
+  };
+
+  this.getTotalCost = function () {
+    return totalCost;
+  };
 
   this.setDish = function (dish){
     dish = dish;

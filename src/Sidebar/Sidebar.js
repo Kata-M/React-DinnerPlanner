@@ -96,7 +96,7 @@ class Sidebar extends Component {
       const arrSum = arr => arr.reduce((a,b) => a + b, 0)
       var totalCostArray = this.state.menu.map((dish) =>  this.countIngredients(dish) * this.state.numberOfGuests)
       var totalCost = arrSum(totalCostArray)
-    
+     
     return (
   
       <Col className="Sidebar" xs={12} md={4} large={4}>
