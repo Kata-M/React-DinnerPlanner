@@ -102,9 +102,9 @@ class SelectDish extends Component {
                       <option value="all">all</option>
                       {showTypes}
                     </select>
-                    { <button className="buttonis-info" onClick={this.searchFilterHandler}>
+                    {/* <button className="buttonis-info" onClick={this.searchFilterHandler}>
                       Search
-                    </button> }
+                    </button> */}
                   </form>
                 </section>
 
@@ -112,8 +112,7 @@ class SelectDish extends Component {
               </div>
             </Row>
             {console.log("Testing Search",this.state.term,this.state.filter)}
-            {/* <DisplayDishes  term={this.state.term}  filter={this.state.filter} /> */}
-            {<Dishes model={this.props.model} type={this.props.term} filter={this.props.filter} />}
+            <DisplayDishes  term={this.state.term}  filter={this.state.filter} />
           </Col>
         </Row>
       </Container>

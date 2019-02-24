@@ -65,6 +65,29 @@ class Dishes extends Component {
     })
   }
 
+
+  componentDidUpdate = (prevProps, prevState) => {
+    // when data is retrieved we update the state
+    // this will cause the component to re-render
+   
+    if (this.props.type != prevProps.type || this.props.filter != prevProps.filter ){
+    modelInstance.getAllDishes(this.props.type,this.props.filter).then(dishes => {
+      {console.log('calling update model',this.props)}
+      this.setState({
+        status: 'LOADED',
+        dishes: dishes.results
+      })
+    }).catch(() => {
+      this.setState({
+        status: 'ERROR'
+      })
+    })
+    }
+  }
+
+  componentWillUnmount() {
+  }
+
   render() {
     let dishesList = null;
 
