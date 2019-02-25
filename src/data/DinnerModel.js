@@ -1,12 +1,22 @@
+import cookie from "react-cookies";
+
 const httpOptions = {
   headers: {'X-Mashape-Key': '3d2a031b4cmsh5cd4e7b939ada54p19f679jsn9a775627d767'}
 };
 
 const DinnerModel = function () {
 
+  
   let numberOfGuests = 1;
+  if(cookie.load('numberOfGuests')){
+    numberOfGuests = cookie.load('numberOfGuests')
+  }
   //let totalCost = 0;
-  var menu = [];
+  let menu = [];
+  if(localStorage.getItem("menu")){
+    menu = JSON.parse(localStorage.getItem("menu"));
+  }
+
   var allTypes = ["main course", "side dish", "dessert", "appetizer", "salad", "bread", "breakfast", "soup", "beverage", "sauce", "drink"];
   let dish = null;
   var totalCost;
@@ -147,7 +157,10 @@ const DinnerModel = function () {
 				// if menu empty or does not exist, put new element in
 				if (menu === undefined || menu.length == 0) {
 
-					menu[0] = dish;
+          menu[0] = dish;
+         // cookie.save('menu', JSON.stringify(menu), { path: '/' })
+         localStorage.setItem("menu", JSON.stringify(menu));
+          console.log("cookie saved menu ", JSON.stringify(menu))
 
 				//if items already in the menu
 				}else{ 
@@ -165,8 +178,11 @@ const DinnerModel = function () {
 					//add new dish to the end of the menu array
 							menu[counter] = dish;
 							console.log(dish);
-					}
-				}
+          }
+          localStorage.setItem("menu", JSON.stringify(menu));
+        }
+        
+        cookie.save('menu', JSON.stringify(menu), { path: '/' })
 
 				notifyObservers();
     // }
@@ -225,6 +241,7 @@ const DinnerModel = function () {
 
     }
     notifyObservers();
+    localStorage.setItem("menu", JSON.stringify(menu));
 	}
 };
 
